@@ -68,7 +68,7 @@ public class Login extends HttpServlet {
         out.println("<HTML>");
         out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
         out.println("  <BODY>");
-        if (vcode.equals(VCode)) {
+        if (vcode.equalsIgnoreCase(VCode)) {
             VCode = "0";
             out.println("hello " + username + "! Welcome to my web!");
         } else {
@@ -94,34 +94,21 @@ class ValidateCode {
     // 验证码图片Buffer
     private BufferedImage buffImg = null;
 
-    // 验证码范围,去掉0(数字)和O(拼音)容易混淆的(小写的1和L也可以去掉,大写不用了)
+    // 验证码范围
     private char[] codeSequence = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
             'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
             'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
-    /**
-     * 默认构造函数,设置默认参数
-     */
     public ValidateCode() {
         this.createCode();
     }
 
-    /**
-     * @param width  图片宽
-     * @param height 图片高
-     */
     public ValidateCode(int width, int height) {
         this.width = width;
         this.height = height;
         this.createCode();
     }
 
-    /**
-     * @param width     图片宽
-     * @param height    图片高
-     * @param codeCount 字符个数
-     * @param lineCount 干扰线条数
-     */
     public ValidateCode(int width, int height, int codeCount, int lineCount) {
         this.width = width;
         this.height = height;
@@ -202,8 +189,4 @@ class ValidateCode {
         return code;
     }
 
-    /**
-     * 测试函数,默认生成到d盘
-     * @param args
-     */
 }
